@@ -1,0 +1,47 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://grass_layered_material.tres" type="Material" id=1]
+[ext_resource path="res://grass_stem_noise.tres" type="Texture" id=2]
+[ext_resource path="res://grass_height_noise.tres" type="Texture" id=3]
+[ext_resource path="res://nicer_grass_height.shader" type="Shader" id=4]
+
+[sub_resource type="SpatialMaterial" id=1]
+next_pass = ExtResource( 1 )
+albedo_color = Color( 0.223529, 0.494118, 0.0745098, 1 )
+
+[sub_resource type="PlaneMesh" id=2]
+material = SubResource( 1 )
+subdivide_width = 32
+subdivide_depth = 32
+
+[sub_resource type="ShaderMaterial" id=6]
+shader = ExtResource( 4 )
+shader_param/base_color = Vector3( 0.2, 0.4, 0.1 )
+shader_param/resolution = 20
+shader_param/wind = null
+shader_param/color_variation = ExtResource( 3 )
+shader_param/height_noise = ExtResource( 2 )
+
+[sub_resource type="SpatialMaterial" id=7]
+next_pass = SubResource( 6 )
+albedo_color = Color( 0.0627451, 0.278431, 0.0313726, 1 )
+
+[sub_resource type="PlaneMesh" id=8]
+material = SubResource( 7 )
+subdivide_width = 16
+subdivide_depth = 16
+
+[node name="Grassy" type="Spatial"]
+
+[node name="Grass1" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2 )
+mesh = SubResource( 2 )
+material/0 = null
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( -0.434671, -0.521975, 0.733896, 0.0176026, 0.809827, 0.586405, -0.900417, 0.267811, -0.34282, 2.01287, 0.396616, -0.342652 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 20, 0, 0, 0, 1, 0, 0, 0, 20, 2.00597, 0.00231588, 1.99437 )
+mesh = SubResource( 8 )
+material/0 = null

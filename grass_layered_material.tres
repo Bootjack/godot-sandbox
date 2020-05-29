@@ -1,0 +1,35 @@
+[gd_resource type="ShaderMaterial" load_steps=7 format=2]
+
+[ext_resource path="res://grass_height_noise.tres" type="Texture" id=1]
+[ext_resource path="res://grass_height.shader" type="Shader" id=2]
+[ext_resource path="res://grass_stem_noise.tres" type="Texture" id=3]
+
+[sub_resource type="ShaderMaterial" id=1]
+render_priority = 3
+shader = ExtResource( 2 )
+shader_param/layer_height = 0.04
+shader_param/alpha_noise = ExtResource( 3 )
+shader_param/height_noise = ExtResource( 1 )
+
+[sub_resource type="ShaderMaterial" id=2]
+render_priority = 2
+next_pass = SubResource( 1 )
+shader = ExtResource( 2 )
+shader_param/layer_height = 0.03
+shader_param/alpha_noise = ExtResource( 3 )
+shader_param/height_noise = ExtResource( 1 )
+
+[sub_resource type="ShaderMaterial" id=3]
+render_priority = 1
+next_pass = SubResource( 2 )
+shader = ExtResource( 2 )
+shader_param/layer_height = 0.02
+shader_param/alpha_noise = ExtResource( 3 )
+shader_param/height_noise = ExtResource( 1 )
+
+[resource]
+next_pass = SubResource( 3 )
+shader = ExtResource( 2 )
+shader_param/layer_height = 0.01
+shader_param/alpha_noise = ExtResource( 3 )
+shader_param/height_noise = ExtResource( 1 )
